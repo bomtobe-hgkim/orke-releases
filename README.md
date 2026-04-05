@@ -96,5 +96,5 @@ Your data stays on your machine. The relay server passes encrypted commands betw
 ---
 
 <div align="center">
-<sub>Built with Claude Code · .NET MAUI · Blazor · SignalR</sub>
+<sub>BOMTOBE</sub>
 </div>
