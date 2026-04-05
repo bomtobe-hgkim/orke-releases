@@ -9,6 +9,8 @@
 [![Release](https://img.shields.io/github/v/release/bomtobe-hgkim/bom-releases?style=flat-square&color=6366f1&label=release)](https://github.com/bomtobe-hgkim/bom-releases/releases/latest)
 [![Windows](https://img.shields.io/badge/Windows-0078D4?style=flat-square&logo=windows11&logoColor=white)](https://apps.microsoft.com/detail/9N7G0NK63QGR)
 [![macOS](https://img.shields.io/badge/macOS-000000?style=flat-square&logo=apple&logoColor=white)](https://github.com/bomtobe-hgkim/bom-releases/releases/latest/download/BomAgent.dmg)
+[![iOS](https://img.shields.io/badge/iOS-000000?style=flat-square&logo=appstore&logoColor=white)](https://apps.apple.com/app/bom-ai-agent/id6761526339)
+[![Android](https://img.shields.io/badge/Android-3DDC84?style=flat-square&logo=googleplay&logoColor=white)](https://play.google.com/store/apps/details?id=com.bomtobe.bom.remote)
 [![Web](https://img.shields.io/badge/bom.bomtobe.com-2dd4bf?style=flat-square)](https://bom.bomtobe.com)
 
 Turn the AI subscription you already pay for into a real desktop assistant.<br>
@@ -17,6 +19,8 @@ One message and your PC handles calendar, browser, and files on its own.<br>
 
 [Download for Mac](https://github.com/bomtobe-hgkim/bom-releases/releases/latest/download/BomAgent.dmg) ·
 [Get on Microsoft Store](https://apps.microsoft.com/detail/9N7G0NK63QGR) ·
+[App Store](https://apps.apple.com/app/bom-ai-agent/id6761526339) ·
+[Google Play](https://play.google.com/store/apps/details?id=com.bomtobe.bom.remote) ·
 [Homepage](https://bom.bomtobe.com)
 
 <br>
@@ -54,6 +58,8 @@ Your Phone / PC ──→ Secure Relay ──→ Your Desktop ──→ AI Engin
 
 ## Download
 
+### Desktop
+
 **macOS** (Apple Silicon) — grab the `.dmg` from [Releases](https://github.com/bomtobe-hgkim/bom-releases/releases/latest):
 
 ```
@@ -61,6 +67,13 @@ curl -LO https://github.com/bomtobe-hgkim/bom-releases/releases/latest/download/
 ```
 
 **Windows** — install from the [Microsoft Store](https://apps.microsoft.com/detail/9N7G0NK63QGR) (search "BOM Agent").
+
+### Mobile Remote
+
+Control your desktop agent from your phone — send commands, monitor tasks, get push notifications.
+
+- [App Store](https://apps.apple.com/app/bom-ai-agent/id6761526339) (iOS)
+- [Google Play](https://play.google.com/store/apps/details?id=com.bomtobe.bom.remote) (Android)
 
 ## Requirements
 
@@ -76,7 +89,9 @@ Your data stays on your machine. The relay server passes encrypted commands betw
 
 - [Homepage](https://bom.bomtobe.com) — Overview and demo video
 - [Releases](https://github.com/bomtobe-hgkim/bom-releases/releases) — All versions
-- [Microsoft Store](https://apps.microsoft.com/detail/9N7G0NK63QGR) — Windows download
+- [Microsoft Store](https://apps.microsoft.com/detail/9N7G0NK63QGR) — Windows
+- [App Store](https://apps.apple.com/app/bom-ai-agent/id6761526339) — iOS
+- [Google Play](https://play.google.com/store/apps/details?id=com.bomtobe.bom.remote) — Android
 
 ---
 
