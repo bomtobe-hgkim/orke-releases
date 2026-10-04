@@ -1,100 +1,31 @@
-<div align="center">
+# orke
 
-<br>
+A desktop workspace that brings terminals, web pages, and coding agents together. Work on your PC, review changes in Git, and continue from another device through an optional ngrok connection.
 
-# Bom Agent
+[Homepage](https://orke.bomtobe.com) · [Support](https://orke.bomtobe.com/support/) · [Source repository](https://github.com/bomtobe-hgkim/orke) · [Release history](https://github.com/bomtobe-hgkim/orke-releases/releases)
 
-**AI Desktop Agent — Your CLI subscription, working for real.**
+## Downloads
 
-[![Release](https://img.shields.io/github/v/release/bomtobe-hgkim/bom-releases?style=flat-square&color=6366f1&label=release)](https://github.com/bomtobe-hgkim/bom-releases/releases/latest)
-[![Windows](https://img.shields.io/badge/Windows-0078D4?style=flat-square&logo=windows11&logoColor=white)](https://apps.microsoft.com/detail/9N7G0NK63QGR)
-[![macOS](https://img.shields.io/badge/macOS-000000?style=flat-square&logo=apple&logoColor=white)](https://github.com/bomtobe-hgkim/bom-releases/releases/latest/download/BomAgent.dmg)
-[![iOS](https://img.shields.io/badge/iOS-000000?style=flat-square&logo=appstore&logoColor=white)](https://apps.apple.com/app/bom-ai-agent/id6761526339)
-[![Android](https://img.shields.io/badge/Android-3DDC84?style=flat-square&logo=googleplay&logoColor=white)](https://play.google.com/store/apps/details?id=com.bomtobe.bom.remote)
-[![Web](https://img.shields.io/badge/bom.bomtobe.com-2dd4bf?style=flat-square)](https://bom.bomtobe.com)
+| Platform | Download | Supported environment |
+| --- | --- | --- |
+| Windows | [Microsoft Store](https://apps.microsoft.com/detail/9N7G0NK63QGR) | x64 |
+| macOS | [orke 3.1.3 DMG](https://github.com/bomtobe-hgkim/orke-releases/releases/download/v3.1.3/orke-macOS-arm64.dmg) · [SHA-256](https://github.com/bomtobe-hgkim/orke-releases/releases/download/v3.1.3/orke-macOS-arm64.dmg.sha256) | macOS 26 or later, Apple Silicon |
+| Android | [Google Play](https://play.google.com/store/apps/details?id=com.bomtobe.bom.remote) | Connects to orke running on your PC |
+| iPhone | [App Store](https://apps.apple.com/app/id6761526339) | Connects to orke running on your PC |
 
-Turn the AI subscription you already pay for into a real desktop assistant.<br>
-One message and your PC handles calendar, browser, and files on its own.<br>
-**No API keys. No extra cost.**
+This repository hosts release downloads. [v3.1.3](https://github.com/bomtobe-hgkim/orke-releases/releases/tag/v3.1.3) is the current macOS release. [v2.2.2](https://github.com/bomtobe-hgkim/orke-releases/releases/tag/v2.2.2) is retained as earlier application history.
 
-[Download for Mac](https://github.com/bomtobe-hgkim/bom-releases/releases/latest/download/BomAgent.dmg) ·
-[Get on Microsoft Store](https://apps.microsoft.com/detail/9N7G0NK63QGR) ·
-[App Store](https://apps.apple.com/app/bom-ai-agent/id6761526339) ·
-[Google Play](https://play.google.com/store/apps/details?id=com.bomtobe.bom.remote) ·
-[Homepage](https://bom.bomtobe.com)
+## What you can do
 
-<br>
+- Use Claude Code, Codex, OpenCode, and Hermes alongside ordinary terminals. The bundled NVIDIA agent is available in the Windows host environment.
+- Open web pages in your workspace and let agents read and operate the same pages you use.
+- Review Git changes, diffs, and history; stage, commit, fetch, pull, and push.
+- Find and reopen terminal sessions, manage supported accounts and usage, and organize skills, commands, and MCP tools.
+- Choose your PC environment or an optional Docker Linux environment; install agents and tools yourself inside Docker.
+- Access your PC workspace from a browser or the mobile app through your own ngrok account.
 
-</div>
+The interface is in Korean. Agent CLIs and their service authentication are prepared separately; provider terms, usage limits, and charges apply. Ordinary terminals do not require an AI account.
 
-## How It Works
+Terminal sessions continue while orke is running, including after a workspace tab closes or a remote connection drops. Remote access requires the PC and orke to remain running and connected to the internet.
 
-Bom Agent follows a **brain + hands** architecture:
-
-- **Brain** — Claude Code or Codex CLI handles reasoning and decision-making
-- **Hands** — The desktop agent executes real actions on your computer
-- **Relay** — A lightweight SignalR server connects your phone to your desktop
-
-```
-Your Phone / PC ──→ Secure Relay ──→ Your Desktop ──→ AI Engine
-  give tasks          SignalR         runs locally     Claude / Codex
-```
-
-**Tell** what you need in plain language. **Your PC runs it** across multiple apps automatically. **Watch progress** in real time — risky actions always ask permission first.
-
-## What It Can Do
-
-| Feature | |
-|:---|:---|
-| **Local PC Control** | Organize files, launch apps, control your browser — right on your machine |
-| **Web Automation** | Log into sites, collect data, fill forms via real Chrome with your cookies |
-| **Mobile Remote** | Send commands from your phone, monitor progress, get push notifications |
-| **Parallel Execution** | Run multiple independent tasks simultaneously |
-| **Scheduled Tasks** | Morning briefings, weekly reports — recurring automation with cron syntax |
-| **Voice Input** | Speak naturally in 15+ languages — no typing required |
-| **Persistent Memory** | Remembers context across sessions for smarter follow-ups |
-| **Model Failover** | If one AI hits a rate limit, seamlessly switches to another |
-| **Safety First** | Destructive actions are blocked. Sensitive tasks require explicit approval |
-
-## Download
-
-### Desktop
-
-**macOS** (Apple Silicon) — grab the `.dmg` from [Releases](https://github.com/bomtobe-hgkim/bom-releases/releases/latest):
-
-```
-curl -LO https://github.com/bomtobe-hgkim/bom-releases/releases/latest/download/BomAgent.dmg
-```
-
-**Windows** — install from the [Microsoft Store](https://apps.microsoft.com/detail/9N7G0NK63QGR) (search "BOM Agent").
-
-### Mobile Remote
-
-Control your desktop agent from your phone — send commands, monitor tasks, get push notifications.
-
-- [App Store](https://apps.apple.com/app/bom-ai-agent/id6761526339) (iOS)
-- [Google Play](https://play.google.com/store/apps/details?id=com.bomtobe.bom.remote) (Android)
-
-## Requirements
-
-- [Claude Pro/Max](https://claude.ai) or [Codex](https://openai.com/codex) CLI subscription
-- macOS 14+ (Apple Silicon) or Windows 10 19041+ (x64)
-- Node.js 18+ (auto-provisioned on first launch)
-
-## Privacy
-
-Your data stays on your machine. The relay server passes encrypted commands between devices — it never stores your files, screen content, or conversation history. All AI processing runs locally through your own CLI.
-
-## Links
-
-- [Homepage](https://bom.bomtobe.com) — Overview and demo video
-- [Releases](https://github.com/bomtobe-hgkim/bom-releases/releases) — All versions
-- [Microsoft Store](https://apps.microsoft.com/detail/9N7G0NK63QGR) — Windows
-- [App Store](https://apps.apple.com/app/bom-ai-agent/id6761526339) — iOS
-- [Google Play](https://play.google.com/store/apps/details?id=com.bomtobe.bom.remote) — Android
-
----
-
-<div align="center">
-<sub>BOMTOBE</sub>
-</div>
+For installation and platform differences, see [support](https://orke.bomtobe.com/support/). Contact: [bomtobe.sw@gmail.com](mailto:bomtobe.sw@gmail.com).
