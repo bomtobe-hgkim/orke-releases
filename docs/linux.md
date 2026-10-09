@@ -1,11 +1,17 @@
 # Install orke on a Linux server
 
-The Linux package runs orke on a server that has no screen, such as a cloud VM. You install it over SSH with a few commands. After that you open orke from a browser or the orke Android app through your own ngrok address, and only the Google account you choose can get in.
+The Linux package runs orke on a server that has no screen, such as a cloud VM. You install it over SSH with one command:
+
+```bash
+curl -fsSL https://orke.bomtobe.com/install.sh | bash
+```
+
+After that you open orke from a browser or the orke Android app through your own ngrok address, and only the Google account you choose can get in.
 
 > [!NOTE]
 > orke's screens and its command-line messages are in Korean. This guide quotes the Korean text you will see and explains what it means.
 
-**On this page:** [How it works](#how-it-works) · [Before you start](#before-you-start) · [1. Packages](#1-install-the-required-packages) · [2. Download](#2-download-orke-and-check-the-file) · [3. Install](#3-install-orke) · [4. ngrok](#4-install-ngrok) · [5. Connect](#5-connect-your-ngrok-address) · [6. Keep it running](#6-start-orke-and-keep-it-running) · [7. Claude Code and Codex](#7-install-and-sign-in-to-claude-code-and-codex) · [8. Open orke](#8-open-orke) · [orke support](#use-orke-support-optional) · [Everyday commands](#everyday-commands) · [Update](#update) · [Uninstall](#uninstall) · [Troubleshooting](#troubleshooting) · [What has been tested](#what-has-been-tested)
+**On this page:** [How it works](#how-it-works) · [Before you start](#before-you-start) · [1. Packages](#1-install-the-required-packages) · [2. Install](#2-install-orke) · [3. Step by step](#3-or-install-it-step-by-step) · [4. ngrok](#4-install-ngrok) · [5. Connect](#5-connect-your-ngrok-address) · [6. Keep it running](#6-start-orke-and-keep-it-running) · [7. Claude Code and Codex](#7-install-and-sign-in-to-claude-code-and-codex) · [8. Open orke](#8-open-orke) · [orke support](#use-orke-support-optional) · [Everyday commands](#everyday-commands) · [Update](#update) · [Uninstall](#uninstall) · [Troubleshooting](#troubleshooting) · [What has been tested](#what-has-been-tested)
 
 ## How it works
 
@@ -37,37 +43,41 @@ sudo apt-get install -y libicu74 ca-certificates procps curl git
 
 The installer checks for these packages. If one is missing, it stops and prints the command that installs it.
 
-## 2. Download orke and check the file
+## 2. Install orke
+
+Run this as the user who will use orke:
+
+```bash
+curl -fsSL https://orke.bomtobe.com/install.sh | bash
+```
+
+The command:
+
+- finds the newest Linux package on the [releases page](https://github.com/bomtobe-hgkim/orke-releases/releases), downloads it and checks its SHA-256,
+- installs orke into `~/.local/share/orke` and creates the command `~/.local/bin/orke`,
+- does not touch your settings and records in `~/.orke`,
+- removes the downloaded files and prints the next commands with their full paths when it finishes.
+
+When it succeeds, it prints `orke 3.4.0 을 설치했습니다` ("orke 3.4.0 has been installed"). If a required package is missing, it stops and prints the `sudo apt-get install` command; run that, then run the same command again.
+
+To install a particular version, add it at the end: `curl -fsSL https://orke.bomtobe.com/install.sh | bash -s -- --version 3.4.0`. You can [read the script](https://orke.bomtobe.com/install.sh) before running it.
+
+> [!TIP]
+> If `~/.local/bin` did not exist before, it is not on your `PATH` until your next login (Ubuntu adds it automatically at login). Until then, type `~/.local/bin/orke` instead of `orke`, or log out and back in. This guide writes `orke` for short.
+
+## 3. Or install it step by step
+
+If you prefer to download and check the package yourself, these commands do the same as step 2:
 
 ```bash
 curl -fLO https://github.com/bomtobe-hgkim/orke-releases/releases/download/v3.4.0/orke-3.4.0-linux-x64.tar.gz
 curl -fLO https://github.com/bomtobe-hgkim/orke-releases/releases/download/v3.4.0/orke-3.4.0-linux-x64.tar.gz.sha256
 sha256sum -c orke-3.4.0-linux-x64.tar.gz.sha256
-```
-
-The last command should print `orke-3.4.0-linux-x64.tar.gz: OK`. If it prints anything else, the download is damaged; download it again.
-
-## 3. Install orke
-
-Run these as the user who will use orke, in the folder where you downloaded the file:
-
-```bash
 tar xzf orke-3.4.0-linux-x64.tar.gz
 ./orke-3.4.0-linux-x64/install.sh
 ```
 
-The installer:
-
-- copies orke to `~/.local/share/orke` and creates the command `~/.local/bin/orke`,
-- does not touch your settings and records in `~/.orke`,
-- prints the next commands with their full paths when it finishes.
-
-When it succeeds, it prints `orke 3.4.0 을 설치했습니다` ("orke 3.4.0 has been installed").
-
-> [!TIP]
-> If `~/.local/bin` did not exist before, it is not on your `PATH` until your next login (Ubuntu adds it automatically at login). Until then, type `~/.local/bin/orke` instead of `orke`, or log out and back in. This guide writes `orke` for short.
-
-You can delete the downloaded `.tar.gz` file and the extracted folder afterwards.
+`sha256sum` should print `orke-3.4.0-linux-x64.tar.gz: OK`; if it prints anything else, the download is damaged, so download it again. You can delete the `.tar.gz` file and the extracted folder afterwards.
 
 ## 4. Install ngrok
 
@@ -151,7 +161,7 @@ sudo apt-get install -y nodejs npm
 sudo npm install -g @openai/codex
 ```
 
-The tests used Claude Code 2.1.292 (it updated itself to 2.1.295 during the tests) and Codex 0.160.1, with Ubuntu's Node.js 18 and npm 9. Without a version number these commands install the newest release, which has not been tested with orke 3.4.0. To install the tested Codex, run `sudo npm install -g @openai/codex@0.160.1`. Do the same if orke support shows `이 codex 버전에서는 꺼야 할 기능(…)을 끌 수 없습니다 — orke 업데이트가 필요합니다.` ("orke cannot turn off features it must turn off in this Codex version; orke needs an update").
+The tests used Claude Code 2.1.292 (it updated itself to 2.1.295 during the tests) and Codex 0.160.1. Codex was installed with Ubuntu's Node.js 18 and npm 9; later in the tests the server's Node.js was 22 from NodeSource. Codex's terminal command starts through Node.js, while orke support runs Codex's own program directly. Without a version number these commands install the newest release, which has not been tested with orke 3.4.0. To install the tested Codex, run `sudo npm install -g @openai/codex@0.160.1`. Do the same if orke support shows `이 codex 버전에서는 꺼야 할 기능(…)을 끌 수 없습니다 — orke 업데이트가 필요합니다.` ("orke cannot turn off features it must turn off in this Codex version; orke needs an update").
 
 Sign in, either in your SSH session now or later from a terminal tab inside orke:
 
@@ -163,13 +173,15 @@ codex login --device-auth
 - **Claude:** open the link it shows, sign in, then paste the code back into the terminal and press <kbd>Enter</kbd>. The code may not appear on screen while you paste it.
 - **Codex:** first turn on device code sign-in in your ChatGPT security settings. Then open <https://auth.openai.com/codex/device> and enter the code that the command shows.
 
+If the shell says `claude: command not found`, this SSH session does not have `~/.local/bin` on its `PATH` yet (see the tip in step 2). Log out and back in, or run `~/.local/bin/claude auth login`.
+
 If Claude or ChatGPT gets signed out while orke support is answering, the orke support window shows a banner with **터미널에서 로그인** (Sign in from a terminal). It opens a new terminal tab with the sign-in command already typed; press <kbd>Enter</kbd> to run it.
 
 OpenCode, Hermes and Antigravity can be installed with their own installers (see [Agents and accounts](../README.md#agents-and-accounts)). They have not been tested on a server yet.
 
 ## 8. Open orke
 
-1. On your PC or phone, open your ngrok address, for example `https://name.ngrok-free.app`, in a browser. In the orke Android app, save the same address. There is no orke iPhone app yet; use Safari.
+1. On your PC or phone, open your ngrok address, for example `https://name.ngrok-free.app`, in a browser. In the Android app, save the same address; the current Google Play version (2.0.4) was published before the rename, so on the phone it is still called BOM. There is no orke iPhone app yet; you can try Safari, which has not been tested yet.
 2. On a free ngrok domain, ngrok first shows a notice page that starts with "You are about to visit". Choose **Visit Site**.
 3. Sign in with the Google account you entered in step 5.
 
@@ -221,15 +233,13 @@ Good to know:
 
 ## Update
 
-Download the new version from the [releases page](https://github.com/bomtobe-hgkim/orke-releases/releases), check it, unpack it and run its installer, the same way as steps 2 and 3:
+Run the same command again. It installs the newest version over the one you have:
 
 ```bash
-curl -fLO https://github.com/bomtobe-hgkim/orke-releases/releases/download/v<version>/orke-<version>-linux-x64.tar.gz
-curl -fLO https://github.com/bomtobe-hgkim/orke-releases/releases/download/v<version>/orke-<version>-linux-x64.tar.gz.sha256
-sha256sum -c orke-<version>-linux-x64.tar.gz.sha256
-tar xzf orke-<version>-linux-x64.tar.gz
-./orke-<version>-linux-x64/install.sh
+curl -fsSL https://orke.bomtobe.com/install.sh | bash
 ```
+
+To do it step by step instead, use the commands from [step 3](#3-or-install-it-step-by-step) with the new version number in place of `3.4.0`.
 
 If the service is running, the installer stops it, puts the new version in place and starts it again. Your settings in `~/.orke` are kept. Stopping the service ends all running sessions, as described in the warning above.
 
@@ -238,18 +248,18 @@ If the service is running, the installer stops it, puts the new version in place
 
 ## Uninstall
 
-Remove the service first, then the program:
+**Before you uninstall**, if you used orke support: while orke is still running, delete its AIs or rooms in the orke support window. That also deletes their Claude and Codex conversation histories, which are kept outside `~/.orke` (in `~/.claude/projects` and `~/.codex/sessions`), and only orke can find them. Give it a minute to finish.
+
+Then, in an SSH session (not in a terminal tab inside orke, where `orke service uninstall` refuses to run), remove the service first and then the program:
 
 ```bash
-~/.local/bin/orke service uninstall
-rm -rf ~/.local/share/orke ~/.local/bin/orke
+~/.local/bin/orke service uninstall && rm -rf ~/.local/share/orke ~/.local/bin/orke
 ```
 
-Do it in this order. If you delete the program first, the service is left trying to start a program that no longer exists.
+Keep this order. If you delete the program first, the service is left trying to start a program that no longer exists; remove it by hand with `systemctl --user disable --now orke`, `rm ~/.config/systemd/user/orke.service` and `systemctl --user daemon-reload`.
 
 Optional clean-up:
 
-- If you used orke support, delete its rooms in orke before uninstalling. Their Claude and Codex conversation histories are kept in `~/.claude/projects` and `~/.codex/sessions`, and deleting a room removes them.
 - `rm -rf ~/.orke` deletes all of orke's settings and records, including the remote access settings.
 - orke's web server also keeps a key file in `~/.aspnet/DataProtection-Keys`. Delete that folder too if no other .NET web app runs as this user.
 - `loginctl disable-linger $USER` turns linger off again, if nothing else on the server needs it.
@@ -278,8 +288,9 @@ Everything below was done on one Ubuntu 24.04.5 LTS (x86_64) server on Google Cl
 
 With the published 3.4.0 package, following this guide:
 
-- downloading the package from the release page and checking it with `sha256sum`,
-- installing it as a new user with no `sudo` rights and no admin groups,
+- installing it with the one-line command from orke.bomtobe.com, including `--version`, a version that does not exist and running it again,
+- installing it step by step: downloading it from the release page and checking it with `sha256sum`,
+- both as a new user with no `sudo` rights and no admin groups,
 - `orke serve`, and stopping it with <kbd>Ctrl</kbd>+<kbd>C</kbd>,
 - `orke service install`, which turned on linger for that user without a password, and `orke service status`,
 - opening orke through an SSH tunnel from another computer, and starting a terminal session there,
@@ -287,7 +298,7 @@ With the published 3.4.0 package, following this guide:
 - starting Claude Code (with orke's status add-on) and Codex sessions from the new-session window in the browser,
 - `orke service uninstall` and removing the files, in the order above.
 
-With test builds of the same code made before the 3.4.0 version number (installed as 3.3.1 and 3.3.2):
+With earlier test builds (installed as 3.3.1 and 3.3.2). Their service, ngrok, installer and orke support code is the same as in 3.4.0, but they did not yet have some later changes, such as orke's status add-on for Claude:
 
 - the service starting at boot without anyone logging in, and running on after logout,
 - ngrok connecting again by itself after the network came back,
@@ -295,4 +306,4 @@ With test builds of the same code made before the 3.4.0 version number (installe
 - signing in to Claude and ChatGPT from a terminal tab inside orke,
 - orke support answering questions on the server.
 
-Not tested yet: other distributions, desktop Linux, servers without systemd, ngrok installed other than from its apt repository, ngrok errors 334, 105 and 107 on a real server (checked only by automated tests), the Google Play version of the Android app, OpenCode, Hermes, Antigravity and NVIDIA on a server, and questions arriving through nginx or Caddy from another computer.
+Not tested yet: other distributions, desktop Linux, servers without systemd, ngrok installed other than from its apt repository, ngrok errors 334, 105 and 107 on a real server (checked only by automated tests), the Google Play version of the Android app, Safari on an iPhone, OpenCode, Hermes, Antigravity and NVIDIA on a server, and questions arriving through nginx or Caddy from another computer.

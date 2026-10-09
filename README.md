@@ -26,8 +26,8 @@
 | **Windows** | [Microsoft Store](https://apps.microsoft.com/detail/9N7G0NK63QGR) | Kept up to date by the Store | Windows, x64 |
 | **macOS** | [orke-macOS-arm64.dmg](https://github.com/bomtobe-hgkim/orke-releases/releases/download/v3.1.3/orke-macOS-arm64.dmg) · [SHA-256](https://github.com/bomtobe-hgkim/orke-releases/releases/download/v3.1.3/orke-macOS-arm64.dmg.sha256) | 3.1.3 (September 19, 2026) | macOS 26 or later, Apple Silicon |
 | **Linux server** | [orke-3.4.0-linux-x64.tar.gz](https://github.com/bomtobe-hgkim/orke-releases/releases/download/v3.4.0/orke-3.4.0-linux-x64.tar.gz) · [SHA-256](https://github.com/bomtobe-hgkim/orke-releases/releases/download/v3.4.0/orke-3.4.0-linux-x64.tar.gz.sha256) · [**Install guide**](docs/linux.md) | 3.4.0 (October 9, 2026) | Ubuntu 24.04 LTS, x86_64, no screen needed |
-| **Android** | [Google Play](https://play.google.com/store/apps/details?id=com.bomtobe.bom.remote) | | Opens an orke that is already running |
-| **iPhone** | No orke app yet. Open orke in Safari. | | The App Store still has the earlier BOM app, which cannot open orke. |
+| **Android** | [Google Play](https://play.google.com/store/apps/details?id=com.bomtobe.bom.remote) | 2.0.4 | Opens an orke that is already running. This version was published before the rename, so on the phone it is still called **BOM**; paste your orke address into it. |
+| **iPhone** | No orke app yet. You can try Safari (not tested yet). | | The App Store still has the earlier BOM app, which cannot open orke. |
 
 The Android app is a remote screen for an orke that runs on your computer or server. It does not run agents on the phone.
 
@@ -45,7 +45,7 @@ The Android app is a remote screen for an orke that runs on your computer or ser
 ### What depends on the platform
 
 - **Windows:** the Microsoft Store version does not have Antigravity support or orke support yet. The tray icon and Windows notifications are Windows only.
-- **macOS 3.1.3** was built on September 19, 2026, before the product got its current name, so the app is still called **BOM**. It does not have the features added since then: web pages inside the workspace, Jev, OpenCode, Hermes and Antigravity support, and orke support.
+- **macOS 3.1.3** was built on September 19, 2026, before the product got its current name, so the app is still called **BOM**. It does not have the features added since then: web pages inside the workspace, Jev, the packages window, OpenCode, Hermes (and its scheduled jobs) and Antigravity support, and orke support.
 - **Linux server 3.4.0** has no desktop window, so web pages cannot be opened inside orke there, and there is no tray or notifications. You use orke from a browser. The [Linux guide](docs/linux.md#what-has-been-tested) lists what has been tested on a server.
 - **NVIDIA agent:** tested on Windows only. The macOS app and the Linux package also include it and offer it as a choice, but it has not been tried there.
 - **Docker sandbox:** orke has an optional sandbox that runs sessions in a Linux container without direct access to your files. Its container image for the current versions has not been published yet, so the sandbox cannot be set up on the current Windows version or on Linux 3.4.0.
@@ -79,17 +79,13 @@ Good to know:
 
 ### Linux server
 
-The Linux package runs orke on a server without a screen. You install it over SSH with a few commands, and then open orke from a browser or the Android app.
+The Linux package runs orke on a server without a screen. Install it over SSH with one command, as the user who will use orke:
 
 ```bash
-curl -fLO https://github.com/bomtobe-hgkim/orke-releases/releases/download/v3.4.0/orke-3.4.0-linux-x64.tar.gz
-curl -fLO https://github.com/bomtobe-hgkim/orke-releases/releases/download/v3.4.0/orke-3.4.0-linux-x64.tar.gz.sha256
-sha256sum -c orke-3.4.0-linux-x64.tar.gz.sha256
-tar xzf orke-3.4.0-linux-x64.tar.gz
-./orke-3.4.0-linux-x64/install.sh
+curl -fsSL https://orke.bomtobe.com/install.sh | bash
 ```
 
-Then install ngrok, connect your ngrok address with `orke remote setup`, and run `orke service install` so that orke keeps running after you log out and after a reboot. Until you log in again, type `~/.local/bin/orke` instead of `orke`; the installer prints the full commands.
+It finds the newest Linux package on the releases page, checks its SHA-256 and installs orke into your home folder. Then install ngrok, connect your ngrok address with `orke remote setup`, and run `orke service install` so that orke keeps running after you log out and after a reboot. Until you log in again, type `~/.local/bin/orke` instead of `orke`; the installer prints the full commands. Open orke from a browser or the Android app.
 
 **Follow the [Linux install guide](docs/linux.md)** for the required packages, every step, updating, uninstalling and troubleshooting.
 
@@ -100,7 +96,7 @@ Then install ngrok, connect your ngrok address with `orke remote setup`, and run
    - **Linux server:** install ngrok, run `orke remote setup`, then start orke as a service. See [steps 4 to 6 of the guide](docs/linux.md#4-install-ngrok).
 
    You need a free [ngrok](https://ngrok.com) account with its free static domain (`name.ngrok-free.app` or `name.ngrok-free.dev`), your ngrok authtoken, and the Google email address you want to allow in.
-2. Open your ngrok address in the Android app, or in any browser (Safari on an iPhone), and sign in with that Google account.
+2. Open your ngrok address in the Android app or in a browser, and sign in with that Google account. On an iPhone you can try Safari; that has not been tested yet.
 
 The work still runs on the computer where orke runs, so it has to stay on and connected to the internet. ngrok's terms and limits apply.
 
@@ -136,7 +132,7 @@ Signing in on a server, where no browser opens by itself:
 
 ## Good to know
 
-- **Your data stays with you.** Settings, accounts and work are saved on the computer where orke runs. orke has no account or cloud service of its own. It connects to other services only for the features you use, for example your AI providers, the websites you open in its web pages, ngrok and Google for remote access, and NVIDIA for the NVIDIA agent. The [privacy policy](https://orke.bomtobe.com/privacy/) lists every case.
+- **Your data stays with you.** Settings, accounts and work are saved on the computer where orke runs. orke has no account or cloud service of its own. It connects to other services only for the features you use, for example your AI providers, the websites you open in its web pages, ngrok and Google for remote access, and NVIDIA for the NVIDIA agent. The [privacy policy](https://orke.bomtobe.com/privacy/) (in Korean) describes these connections. It has not been updated for orke support (new in 3.4.0) yet: questions your services send are saved in `~/.orke/support` and answered through the Claude or Codex program on that computer, and orke connects to the MCP servers you add to an AI.
 - **Agents act on their own.** orke starts agents with their permission prompts skipped. Check what they change in your working folder.
 - **Sessions last while orke runs.** They survive closed tabs and dropped connections, but not quitting orke, restarting or updating it, or restarting the computer.
 
@@ -146,12 +142,13 @@ Signing in on a server, where no browser opens by itself:
 | --- | --- | --- |
 | Windows | The Microsoft Store updates orke. | Uninstall orke from Windows Settings › Apps. |
 | macOS | Download the new DMG and replace the app in Applications. | Quit the app and move it (BOM.app for 3.1.3) to the Trash. |
-| Linux server | Run the new package's `install.sh`. It restarts orke with the new version, which ends all running sessions. | Run `orke service uninstall`, then delete `~/.local/share/orke` and `~/.local/bin/orke`. [Details](docs/linux.md#uninstall) |
+| Linux server | Run the [install command](#linux-server) again. It installs the newest version and restarts orke, which ends all running sessions. | In an SSH session, run `orke service uninstall`, then delete `~/.local/share/orke` and `~/.local/bin/orke`. [Details](docs/linux.md#uninstall) |
 
-Uninstalling leaves your data in place. Quit orke, keep any work files you need, then remove it yourself:
+**Before you uninstall**, if you used orke support: while orke is still running, delete its AIs or rooms in the orke support window. That also deletes their Claude and Codex conversation histories, which are kept outside `~/.orke` (in `~/.claude/projects` and `~/.codex/sessions`), and only orke can find them.
+
+Uninstalling leaves your data in place. Afterwards, keep any work files you need, then remove it yourself:
 
 - the data folder `~/.orke` (macOS 3.1.3: `~/.bom`),
-- if you used orke support: delete its rooms in orke first. Their Claude and Codex conversation histories are kept in `~/.claude/projects` and `~/.codex/sessions`, outside `~/.orke`, and deleting a room removes them.
 - if you used the Docker sandbox: the container and its volume, with `docker rm -f orke` and then `docker volume rm orke-home` (macOS 3.1.3: `bom` and `bom-home`).
 
 ## Where orke keeps your data
@@ -175,7 +172,7 @@ To keep orke's data somewhere else, set the `ORKE_HOME` environment variable to 
 No. The Linux package is for servers and runs without a screen. You use it from a browser or the Android app.
 
 **Is there an iPhone app?**
-Not for orke yet. The App Store still has the earlier BOM app, which cannot open orke. On an iPhone, open your orke address in Safari.
+Not for orke yet. The App Store still has the earlier BOM app, which cannot open orke. On an iPhone you can try your orke address in Safari; that has not been tested yet.
 
 **Does orke run on Intel Macs?**
 No. The macOS app supports Apple Silicon only.
@@ -187,7 +184,7 @@ Not for ordinary terminals. Each agent needs its own account with its provider.
 The session is still running. Reopen it from the **세션** (Sessions) button at the top right. Text already printed comes back; a web page that reloads may lose unsaved form input.
 
 **Where can I find more help?**
-The [support page](https://orke.bomtobe.com/support/) answers more questions about windows, notifications, Docker isolation, terminals, web pages, agents and remote access (in Korean).
+The [support page](https://orke.bomtobe.com/support/) answers more questions about windows, notifications, terminals, web pages, agents and remote access (in Korean). It has not been fully updated for 3.4.0 yet: where it differs from this page about the iPhone app or the Docker sandbox image, this page is current.
 
 ## Releases
 
