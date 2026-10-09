@@ -58,9 +58,9 @@ The command:
 - does not touch your settings and records in `~/.orke`,
 - removes the downloaded files and prints the next commands with their full paths when it finishes.
 
-When it succeeds, it prints `orke 3.4.0 을 설치했습니다` ("orke 3.4.0 has been installed"). If a required package is missing, it stops and prints the `sudo apt-get install` command; run that, then run the same command again.
+When it succeeds, it prints `orke 3.4.1 을 설치했습니다` ("orke 3.4.1 has been installed"). If a required package is missing, it stops and prints the `sudo apt-get install` command; run that, then run the same command again.
 
-To install a particular version, add it at the end: `curl -fsSL https://orke.bomtobe.com/install.sh | bash -s -- --version 3.4.0`. You can [read the script](https://orke.bomtobe.com/install.sh) before running it.
+To install a particular version, add it at the end: `curl -fsSL https://orke.bomtobe.com/install.sh | bash -s -- --version 3.4.1`. You can [read the script](https://orke.bomtobe.com/install.sh) before running it.
 
 > [!TIP]
 > If `~/.local/bin` did not exist before, it is not on your `PATH` until your next login (Ubuntu adds it automatically at login). Until then, type `~/.local/bin/orke` instead of `orke`, or log out and back in. This guide writes `orke` for short.
@@ -70,14 +70,14 @@ To install a particular version, add it at the end: `curl -fsSL https://orke.bom
 If you prefer to download and check the package yourself, these commands do the same as step 2:
 
 ```bash
-curl -fLO https://github.com/bomtobe-hgkim/orke-releases/releases/download/v3.4.0/orke-3.4.0-linux-x64.tar.gz
-curl -fLO https://github.com/bomtobe-hgkim/orke-releases/releases/download/v3.4.0/orke-3.4.0-linux-x64.tar.gz.sha256
-sha256sum -c orke-3.4.0-linux-x64.tar.gz.sha256
-tar xzf orke-3.4.0-linux-x64.tar.gz
-./orke-3.4.0-linux-x64/install.sh
+curl -fLO https://github.com/bomtobe-hgkim/orke-releases/releases/download/v3.4.1/orke-3.4.1-linux-x64.tar.gz
+curl -fLO https://github.com/bomtobe-hgkim/orke-releases/releases/download/v3.4.1/orke-3.4.1-linux-x64.tar.gz.sha256
+sha256sum -c orke-3.4.1-linux-x64.tar.gz.sha256
+tar xzf orke-3.4.1-linux-x64.tar.gz
+./orke-3.4.1-linux-x64/install.sh
 ```
 
-`sha256sum` should print `orke-3.4.0-linux-x64.tar.gz: OK`; if it prints anything else, the download is damaged, so download it again. You can delete the `.tar.gz` file and the extracted folder afterwards.
+`sha256sum` should print `orke-3.4.1-linux-x64.tar.gz: OK`; if it prints anything else, the download is damaged, so download it again. You can delete the `.tar.gz` file and the extracted folder afterwards.
 
 ## 4. Install ngrok
 
@@ -239,7 +239,7 @@ Run the same command again. It installs the newest version over the one you have
 curl -fsSL https://orke.bomtobe.com/install.sh | bash
 ```
 
-To do it step by step instead, use the commands from [step 3](#3-or-install-it-step-by-step) with the new version number in place of `3.4.0`.
+To do it step by step instead, use the commands from [step 3](#3-or-install-it-step-by-step) with the new version number in place of `3.4.1`.
 
 If the service is running, the installer stops it, puts the new version in place and starts it again. Your settings in `~/.orke` are kept. Stopping the service ends all running sessions, as described in the warning above.
 
@@ -285,6 +285,11 @@ orke does not keep retrying after ngrok errors 334, 105 and 107. Fix the cause, 
 ## What has been tested
 
 Everything below was done on one Ubuntu 24.04.5 LTS (x86_64) server on Google Cloud, in October 2026.
+
+With the published 3.4.1 package, which differs from 3.4.0 only in its fix for the ChatGPT tab:
+
+- updating an existing 3.4.0 installation with ngrok by running the one-line command again: it picked 3.4.1 by itself, and ngrok connected again 6 seconds after the update,
+- a ChatGPT tab showing **입력 대기** (waiting for input) under **확인 필요** after Codex had answered, twice in a row (Codex 0.160.1 with no reasoning level chosen; with 3.4.0 the same tab kept showing **작업 중**).
 
 With the published 3.4.0 package, following this guide:
 

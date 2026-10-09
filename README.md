@@ -25,7 +25,7 @@
 | --- | --- | --- | --- |
 | **Windows** | [Microsoft Store](https://apps.microsoft.com/detail/9N7G0NK63QGR) | Kept up to date by the Store | Windows, x64 |
 | **macOS** | [orke-macOS-arm64.dmg](https://github.com/bomtobe-hgkim/orke-releases/releases/download/v3.1.3/orke-macOS-arm64.dmg) · [SHA-256](https://github.com/bomtobe-hgkim/orke-releases/releases/download/v3.1.3/orke-macOS-arm64.dmg.sha256) | 3.1.3 (September 19, 2026) | macOS 26 or later, Apple Silicon |
-| **Linux server** | [orke-3.4.0-linux-x64.tar.gz](https://github.com/bomtobe-hgkim/orke-releases/releases/download/v3.4.0/orke-3.4.0-linux-x64.tar.gz) · [SHA-256](https://github.com/bomtobe-hgkim/orke-releases/releases/download/v3.4.0/orke-3.4.0-linux-x64.tar.gz.sha256) · [**Install guide**](docs/linux.md) | 3.4.0 (October 9, 2026) | Ubuntu 24.04 LTS, x86_64, no screen needed |
+| **Linux server** | [orke-3.4.1-linux-x64.tar.gz](https://github.com/bomtobe-hgkim/orke-releases/releases/download/v3.4.1/orke-3.4.1-linux-x64.tar.gz) · [SHA-256](https://github.com/bomtobe-hgkim/orke-releases/releases/download/v3.4.1/orke-3.4.1-linux-x64.tar.gz.sha256) · [**Install guide**](docs/linux.md) | 3.4.1 (October 9, 2026) | Ubuntu 24.04 LTS, x86_64, no screen needed |
 | **Android** | [Google Play](https://play.google.com/store/apps/details?id=com.bomtobe.bom.remote) | 2.0.4 | Opens an orke that is already running. This version was published before the rename, so on the phone it is still called **BOM**; paste your orke address into it. |
 | **iPhone** | No orke app yet. You can try Safari (not tested yet). | | The App Store still has the earlier BOM app, which cannot open orke. |
 
@@ -47,7 +47,7 @@ The Android app is a remote screen for an orke that runs on your computer or ser
 
 - **Windows:** the Microsoft Store version does not have Antigravity support or orke support yet. The tray icon and Windows notifications are Windows only.
 - **macOS 3.1.3** was built on September 19, 2026, before the product got its current name, so the app is still called **BOM**. It does not have the features added since then: web pages inside the workspace, Jev, the packages window, OpenCode, Hermes (and its scheduled jobs) and Antigravity support, and orke support.
-- **Linux server 3.4.0** has no desktop window, so web pages cannot be opened inside orke there, and there is no tray or notifications. You use orke from a browser. The [Linux guide](docs/linux.md#what-has-been-tested) lists what has been tested on a server.
+- **Linux server 3.4.1** has no desktop window, so web pages cannot be opened inside orke there, and there is no tray or notifications. You use orke from a browser. The [Linux guide](docs/linux.md#what-has-been-tested) lists what has been tested on a server.
 - **NVIDIA agent:** tested on Windows only. The macOS app and the Linux package also include it and offer it as a choice, but it has not been tried there.
 - **Docker sandbox:** its image (`ghcr.io/bomtobe-hgkim/orke-env:5.0.0`, about 124 MB to download) is public, so orke downloads it without a GitHub sign-in. It has not been tried on a Linux server yet, and on Apple Silicon Macs it runs under emulation and has not been tested.
 
@@ -191,6 +191,7 @@ The [support page](https://orke.bomtobe.com/support/) answers more questions abo
 
 | Version | Date | Platform | Notes |
 | --- | --- | --- | --- |
+| [3.4.1](https://github.com/bomtobe-hgkim/orke-releases/releases/tag/v3.4.1) | 2026-10-09 | Linux x64 | Fixes a ChatGPT tab that kept showing 작업 중 (working) after Codex had answered. |
 | [3.4.0](https://github.com/bomtobe-hgkim/orke-releases/releases/tag/v3.4.0) | 2026-10-09 | Linux x64 | First Linux server package. Adds orke support. |
 | [3.1.3](https://github.com/bomtobe-hgkim/orke-releases/releases/tag/v3.1.3) | 2026-09-19 | macOS (Apple Silicon) | Signed and notarized DMG. The app is still named BOM. |
 | [2.2.2](https://github.com/bomtobe-hgkim/orke-releases/releases/tag/v2.2.2) | 2026-07-12 | macOS | The earlier app (orke-agent), kept for history. |
