@@ -39,6 +39,7 @@ The Android app is a remote screen for an orke that runs on your computer or ser
 - **Keep sessions running.** Closing a tab or losing the connection does not stop a terminal while orke is running. Find and reopen sessions from the session list.
 - **Manage accounts and usage.** Register more than one Claude or ChatGPT account, switch the account your CLI uses, and see how much usage is left.
 - **Manage packages.** Review skills, commands and MCP servers for supported agents, and Hermes scheduled jobs.
+- **Use a Docker sandbox if you want one.** Isolated sessions run in a Linux container that cannot read your computer's files directly. It needs a Docker-compatible engine such as Docker Desktop, and you install the agents inside it yourself.
 - **Reach your workspace from anywhere.** Open orke from a browser or the Android app through your own ngrok address, protected by a Google sign-in that only lets in the email address you choose.
 - **Answer questions from your own services (new in 3.4.0).** With orke support, a website or chat bot you run can send questions over HTTP and get answers from the Claude or ChatGPT subscription you are signed in to.
 
@@ -48,7 +49,7 @@ The Android app is a remote screen for an orke that runs on your computer or ser
 - **macOS 3.1.3** was built on September 19, 2026, before the product got its current name, so the app is still called **BOM**. It does not have the features added since then: web pages inside the workspace, Jev, the packages window, OpenCode, Hermes (and its scheduled jobs) and Antigravity support, and orke support.
 - **Linux server 3.4.0** has no desktop window, so web pages cannot be opened inside orke there, and there is no tray or notifications. You use orke from a browser. The [Linux guide](docs/linux.md#what-has-been-tested) lists what has been tested on a server.
 - **NVIDIA agent:** tested on Windows only. The macOS app and the Linux package also include it and offer it as a choice, but it has not been tried there.
-- **Docker sandbox:** orke has an optional sandbox that runs sessions in a Linux container without direct access to your files. Its container image for the current versions has not been published yet, so the sandbox cannot be set up on the current Windows version or on Linux 3.4.0.
+- **Docker sandbox:** its image (`ghcr.io/bomtobe-hgkim/orke-env:5.0.0`, about 124 MB to download) is public, so orke downloads it without a GitHub sign-in. It has not been tried on a Linux server yet, and on Apple Silicon Macs it runs under emulation and has not been tested.
 
 ## Get started
 
@@ -113,7 +114,7 @@ orke does not include the agent programs, except its own NVIDIA agent. Install t
 | [Antigravity](https://antigravity.google) | `agy` | Managed by agy |
 | NVIDIA (included with orke) | none | NVIDIA API key in **설정 › 계정** (Settings › Accounts) |
 
-On Linux, these are the providers' install commands:
+On Linux, including inside the Docker sandbox, these are the providers' install commands. orke shows the same commands when an agent is missing from the sandbox.
 
 ```bash
 curl -fsSL https://claude.ai/install.sh | bash                          # Claude Code
@@ -125,7 +126,7 @@ curl -fsSL https://antigravity.google/cli/install.sh | bash             # Antigr
 
 On Windows and macOS, follow each provider's own instructions. The [Linux guide](docs/linux.md#7-install-and-sign-in-to-claude-code-and-codex) lists the install commands and versions that were used on the test server.
 
-Signing in on a server, where no browser opens by itself:
+Signing in on a server or inside the Docker sandbox, where no browser opens by itself:
 
 - **ChatGPT (Codex)** uses a device code. Turn on device code sign-in in your ChatGPT security settings first.
 - **Claude** shows a link to open and asks you to paste the code back into the terminal. The code may not appear on screen while you paste it; press <kbd>Enter</kbd> anyway.
@@ -184,7 +185,7 @@ Not for ordinary terminals. Each agent needs its own account with its provider.
 The session is still running. Reopen it from the **세션** (Sessions) button at the top right. Text already printed comes back; a web page that reloads may lose unsaved form input.
 
 **Where can I find more help?**
-The [support page](https://orke.bomtobe.com/support/) answers more questions about windows, notifications, terminals, web pages, agents and remote access (in Korean). It has not been fully updated for 3.4.0 yet: where it differs from this page about the iPhone app or the Docker sandbox image, this page is current.
+The [support page](https://orke.bomtobe.com/support/) answers more questions about windows, notifications, terminals, web pages, agents and remote access (in Korean). It has not been fully updated for 3.4.0 yet: where it differs from this page about the iPhone app, this page is current.
 
 ## Releases
 

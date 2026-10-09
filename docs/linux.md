@@ -306,4 +306,4 @@ With earlier test builds (installed as 3.3.1 and 3.3.2). Their service, ngrok, i
 - signing in to Claude and ChatGPT from a terminal tab inside orke,
 - orke support answering questions on the server.
 
-Not tested yet: other distributions, desktop Linux, servers without systemd, ngrok installed other than from its apt repository, ngrok errors 334, 105 and 107 on a real server (checked only by automated tests), the Google Play version of the Android app, Safari on an iPhone, OpenCode, Hermes, Antigravity and NVIDIA on a server, and questions arriving through nginx or Caddy from another computer.
+Not tested yet: other distributions, desktop Linux, servers without systemd, ngrok installed other than from its apt repository, ngrok errors 334, 105 and 107 on a real server (checked only by automated tests), the Google Play version of the Android app, Safari on an iPhone, OpenCode, Hermes, Antigravity, NVIDIA and the Docker sandbox on a server, and questions arriving through nginx or Caddy from another computer.
