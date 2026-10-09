@@ -133,7 +133,7 @@ Signing in on a server or inside the Docker sandbox, where no browser opens by i
 
 ## Good to know
 
-- **Your data stays with you.** Settings, accounts and work are saved on the computer where orke runs. orke has no account or cloud service of its own. It connects to other services only for the features you use, for example your AI providers, the websites you open in its web pages, ngrok and Google for remote access, and NVIDIA for the NVIDIA agent. The [privacy policy](https://orke.bomtobe.com/privacy/) (in Korean) describes these connections. It has not been updated for orke support (new in 3.4.0) yet: questions your services send are saved in `~/.orke/support` and answered through the Claude or Codex program on that computer, and orke connects to the MCP servers you add to an AI.
+- **Your data stays with you.** Settings, accounts and work are saved on the computer where orke runs. orke has no account or cloud service of its own. It connects to other services only for the features you use, for example your AI providers, the websites you open in its web pages, ngrok and Google for remote access, and NVIDIA for the NVIDIA agent. The [privacy policy](https://orke.bomtobe.com/privacy/) (in Korean) describes these connections, including what orke support stores and sends.
 - **Agents act on their own.** orke starts agents with their permission prompts skipped. Check what they change in your working folder.
 - **Sessions last while orke runs.** They survive closed tabs and dropped connections, but not quitting orke, restarting or updating it, or restarting the computer.
 
