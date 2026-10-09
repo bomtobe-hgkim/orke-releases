@@ -295,7 +295,8 @@ With the published 3.4.0 package, following this guide:
 - `orke service install`, which turned on linger for that user without a password, and `orke service status`,
 - opening orke through an SSH tunnel from another computer, and starting a terminal session there,
 - updating over a running service: for that new user, and for an existing installation with ngrok, which connected again 6 seconds after the update,
-- starting Claude Code (with orke's status add-on) and Codex sessions from the new-session window in the browser,
+- starting Claude Code (with orke's status add-on) and Codex sessions from the new-session window in the browser, and asking each of them questions in English and in Korean,
+- orke support answering questions sent from another computer over HTTPS, once through Caddy and once through nginx, each set up as in the examples in **orke support 설정** (with a private test certificate instead of a public domain),
 - `orke service uninstall` and removing the files, in the order above.
 
 With earlier test builds (installed as 3.3.1 and 3.3.2). Their service, ngrok, installer and orke support code is the same as in 3.4.0, but they did not yet have some later changes, such as orke's status add-on for Claude:
@@ -303,7 +304,6 @@ With earlier test builds (installed as 3.3.1 and 3.3.2). Their service, ngrok, i
 - the service starting at boot without anyone logging in, and running on after logout,
 - ngrok connecting again by itself after the network came back,
 - opening orke at the ngrok address from a PC browser and from a development build of the Android app,
-- signing in to Claude and ChatGPT from a terminal tab inside orke,
-- orke support answering questions on the server.
+- signing in to Claude and ChatGPT from a terminal tab inside orke.
 
-Not tested yet: other distributions, desktop Linux, servers without systemd, ngrok installed other than from its apt repository, ngrok errors 334, 105 and 107 on a real server (checked only by automated tests), the Google Play version of the Android app, Safari on an iPhone, OpenCode, Hermes, Antigravity, NVIDIA and the Docker sandbox on a server, and questions arriving through nginx or Caddy from another computer.
+Not tested yet: other distributions, desktop Linux, servers without systemd, ngrok installed other than from its apt repository, ngrok errors 334, 105 and 107 on a real server (checked only by automated tests), the Google Play version of the Android app, Safari on an iPhone, OpenCode, Hermes, Antigravity, NVIDIA and the Docker sandbox on a server, and a public domain with a certificate from a public authority (such as Let's Encrypt) in front of orke support.
