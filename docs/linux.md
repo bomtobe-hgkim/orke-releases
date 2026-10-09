@@ -173,6 +173,8 @@ OpenCode, Hermes and Antigravity can be installed with their own installers (see
 2. On a free ngrok domain, ngrok first shows a notice page that starts with "You are about to visit". Choose **Visit Site**.
 3. Sign in with the Google account you entered in step 5.
 
+To start working, press <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>T</kbd> or click the terminal button in the Dock at the bottom of the screen. Choose **Terminal**, **Claude**, **ChatGPT** or another agent, and a working folder, then **시작** (Start).
+
 The usage shown at the top right is for the accounts signed in on the server.
 
 **Without ngrok**, you can open orke through an SSH tunnel. The service log names the port:
@@ -249,6 +251,7 @@ Optional clean-up:
 
 - If you used orke support, delete its rooms in orke before uninstalling. Their Claude and Codex conversation histories are kept in `~/.claude/projects` and `~/.codex/sessions`, and deleting a room removes them.
 - `rm -rf ~/.orke` deletes all of orke's settings and records, including the remote access settings.
+- orke's web server also keeps a key file in `~/.aspnet/DataProtection-Keys`. Delete that folder too if no other .NET web app runs as this user.
 - `loginctl disable-linger $USER` turns linger off again, if nothing else on the server needs it.
 - `sudo apt-get remove ngrok` removes ngrok.
 
@@ -271,13 +274,25 @@ orke does not keep retrying after ngrok errors 334, 105 and 107. Fix the cause, 
 
 ## What has been tested
 
-On one Ubuntu 24.04.5 LTS (x86_64) server on Google Cloud, in October 2026, with test builds of this release's code (installed as 3.3.1 and 3.3.2, before the 3.4.0 version number):
+Everything below was done on one Ubuntu 24.04.5 LTS (x86_64) server on Google Cloud, in October 2026.
 
-- installing, and updating over a running service, with `install.sh`,
-- the service starting at boot without anyone logging in, and running on after logout (for a user in the server's admin groups, where linger could be turned on without a password),
+With the published 3.4.0 package, following this guide:
+
+- downloading the package from the release page and checking it with `sha256sum`,
+- installing it as a new user with no `sudo` rights and no admin groups,
+- `orke serve`, and stopping it with <kbd>Ctrl</kbd>+<kbd>C</kbd>,
+- `orke service install`, which turned on linger for that user without a password, and `orke service status`,
+- opening orke through an SSH tunnel from another computer, and starting a terminal session there,
+- updating over a running service: for that new user, and for an existing installation with ngrok, which connected again 6 seconds after the update,
+- starting Claude Code (with orke's status add-on) and Codex sessions from the new-session window in the browser,
+- `orke service uninstall` and removing the files, in the order above.
+
+With test builds of the same code made before the 3.4.0 version number (installed as 3.3.1 and 3.3.2):
+
+- the service starting at boot without anyone logging in, and running on after logout,
 - ngrok connecting again by itself after the network came back,
 - opening orke at the ngrok address from a PC browser and from a development build of the Android app,
 - signing in to Claude and ChatGPT from a terminal tab inside orke,
 - orke support answering questions on the server.
 
-Not tested yet: other distributions, desktop Linux, servers without systemd, ngrok installed other than from its apt repository, ngrok errors 334, 105 and 107 on a real server (checked only by automated tests), Claude Code and Codex sessions started from the new-session window, opening orke through an SSH tunnel, the Google Play version of the Android app, and questions arriving through nginx or Caddy from another computer.
+Not tested yet: other distributions, desktop Linux, servers without systemd, ngrok installed other than from its apt repository, ngrok errors 334, 105 and 107 on a real server (checked only by automated tests), the Google Play version of the Android app, OpenCode, Hermes, Antigravity and NVIDIA on a server, and questions arriving through nginx or Caddy from another computer.
